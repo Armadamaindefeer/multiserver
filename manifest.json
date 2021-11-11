@@ -18,6 +18,11 @@
 		"version": 0.1,
 		"required": true
 		},
-		
+		{
+		"name": "fileChecker.py",
+		"download": "",
+		"version": 0.1,
+		"required": false
+		},
 	],
 }
