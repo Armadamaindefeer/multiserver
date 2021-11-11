@@ -1,9 +1,11 @@
 {
-    "lib":{
+	"lib":[
+		{
 		"name": "utility",
 		"download": "https://pastebin.com/raw/zF0hbnCx",
 		"version": 0.1,
-        "extension": "json",
+		"extension": "json",
 		"required": true
-	},
+		}
+	],
 }
