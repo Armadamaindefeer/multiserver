@@ -1,24 +1,21 @@
 {
 	"lib":[
 		{
-		"name": "utility",
+		"name": "utility.py",
 		"download": "",
 		"version": 0.1,
-		"extension": "json",
 		"required": true
 		},
 		{
-		"name": "logger",
+		"name": "logger.py",
 		"download": "",
 		"version": 0.1,
-		"extension": "json",
 		"required": true
 		},
 		{
-		"name": "updater",
+		"name": "updater.py",
 		"download": "",
 		"version": 0.1,
-		"extension": "json",
 		"required": true
 		},
 		
