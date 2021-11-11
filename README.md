@@ -1,0 +1,2 @@
+# multiserver
+A server manager
