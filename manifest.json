@@ -2,10 +2,25 @@
 	"lib":[
 		{
 		"name": "utility",
-		"download": "https://pastebin.com/raw/zF0hbnCx",
+		"download": "",
 		"version": 0.1,
 		"extension": "json",
 		"required": true
-		}
+		},
+		{
+		"name": "logger",
+		"download": "",
+		"version": 0.1,
+		"extension": "json",
+		"required": true
+		},
+		{
+		"name": "updater",
+		"download": "",
+		"version": 0.1,
+		"extension": "json",
+		"required": true
+		},
+		
 	],
 }
