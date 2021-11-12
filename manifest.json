@@ -2,25 +2,25 @@
 	"lib":[
 		{
 		"name": "utility.py",
-		"download": "",
+		"download": "https://raw.githubusercontent.com/Armadamaindefeer/multiserver/main/API/utility.py",
 		"version": 0.1,
 		"required": true
 		},
 		{
 		"name": "logger.py",
-		"download": "",
+		"download": "https://raw.githubusercontent.com/Armadamaindefeer/multiserver/main/API/logger.py",
 		"version": 0.1,
 		"required": true
 		},
 		{
 		"name": "updater.py",
-		"download": "",
+		"download": "https://raw.githubusercontent.com/Armadamaindefeer/multiserver/main/API/updater.py",
 		"version": 0.1,
 		"required": true
 		},
 		{
 		"name": "fileChecker.py",
-		"download": "",
+		"download": "https://raw.githubusercontent.com/Armadamaindefeer/multiserver/main/API/fileChecker.py",
 		"version": 0.1,
 		"required": false
 		}
