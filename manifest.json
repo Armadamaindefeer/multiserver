@@ -1,5 +1,5 @@
 {
-	"lib":[
+	"library":[
 		{
 		"name": "utility.py",
 		"download": "https://raw.githubusercontent.com/Armadamaindefeer/multiserver/main/API/utility.py",
@@ -7,8 +7,8 @@
 		"required": true
 		},
 		{
-		"name": "logger.py",
-		"download": "https://raw.githubusercontent.com/Armadamaindefeer/multiserver/main/API/logger.py",
+		"name": "logging.py",
+		"download": "https://raw.githubusercontent.com/Armadamaindefeer/multiserver/main/API/logging.py",
 		"version": 0.1,
 		"required": true
 		},
@@ -23,6 +23,25 @@
 		"download": "https://raw.githubusercontent.com/Armadamaindefeer/multiserver/main/API/fileChecker.py",
 		"version": 0.1,
 		"required": false
+		},
+		{
+		"name": "constant.py",
+		"download": "https://raw.githubusercontent.com/Armadamaindefeer/multiserver/main/API/constant.py",
+		"version": 0.1,
+		"subfolder": true,
+		"required": true
 		}
-	]
+		{
+		"name": "clean.py",
+		"download": "https://raw.githubusercontent.com/Armadamaindefeer/multiserver/main/API/clean.py",
+		"version": 0.1,
+		"required": true
+		}
+	],
+	"executor":
+		{
+		"name": "MultiServer.py",
+		"download": "https://raw.githubusercontent.com/Armadamaindefeer/multiserver/main/MultiServer.py",
+		"version": 0.1,
+		},
 }
