@@ -38,10 +38,10 @@
 		"required": true
 		}
 	],
-	"executor":
-		{
+	"executor":{
+		
 		"name": "MultiServer.py",
 		"download": "https://raw.githubusercontent.com/Armadamaindefeer/multiserver/main/MultiServer.py",
-		"version": 0.1,
+		"version": 0.1
 		}
 }
