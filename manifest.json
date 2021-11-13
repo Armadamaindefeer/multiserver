@@ -30,7 +30,7 @@
 		"version": 0.1,
 		"subfolder": true,
 		"required": true
-		}
+		},
 		{
 		"name": "clean.py",
 		"download": "https://raw.githubusercontent.com/Armadamaindefeer/multiserver/main/API/clean.py",
