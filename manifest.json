@@ -28,7 +28,6 @@
 		"name": "constant.py",
 		"download": "https://raw.githubusercontent.com/Armadamaindefeer/multiserver/main/API/constant.py",
 		"version": 0.1,
-		"subfolder": true,
 		"required": true
 		},
 		{
@@ -38,10 +37,9 @@
 		"required": true
 		}
 	],
-	"executor":{
-		
+	"executor": {
 		"name": "MultiServer.py",
 		"download": "https://raw.githubusercontent.com/Armadamaindefeer/multiserver/main/MultiServer.py",
 		"version": 0.1
-		}
+		},
 }
