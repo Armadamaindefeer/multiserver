@@ -22,11 +22,19 @@ def getLibManifest(workingDir):
 		libManifest = json.load(manifest)
 	return libManifest
 
+def downloadLib(url, name, workingDir)
+	r = requests.get(url)
+	if not open((workingDir + '/' + name), 'wb').write(r.content)
+		return False
+	else:
+		return True
+
 #>>-----------Main------------------<<
 
 DATA_DIR = 'data'
 CONFIG_DIR = DATA_DIR + '/config'
 LIBRARY_DIR = DATA_DIR + '/library'
+SUB_LIBRARY_DIR = LIBRARY_DIR + '/sublibrary'
 TEMP_DIR = DATA_DIR + '/.temp'
 SERVER_DIR = DATA_DIR + '/servers'
 
@@ -36,6 +44,8 @@ if not os.path.isdir(DATA_DIR):
 	os.mkdir(DATA_DIR)
 if not os.path.isdir(CONFIG_DIR + '/'):
 	os.mkdir(CONFIG_DIR)
+if not os.path.isdir(SUB_LIBRARY_DIR + '/')
+	os.mkdir(SUB_LIBRARY_DIR)
 if not os.path.isdir(SERVER_DIR + '/'):
 	os.mkdir(SERVER_DIR)
 if not os.path.isdir(LIBRARY_DIR + '/'):
@@ -45,17 +55,14 @@ if not os.path.isdir(TEMP_DIR + '/'):
 
 libManifest = getLibManifest(LIBRARY_DIR + '/')
 
-print('Downloading library')
 for key in libManifest['library']:
 	if key['required']:
-		r = requests.get(key['download'])
 		print('Downloading %s from %s' % (key['name'], key['download']))
-		if 'subfolder' in key and key['subfolder'] = true:
-			os.mkdir(LIBRARY_DIR + '/' + key['name'])
-			if not open((LIBRARY_DIR + '/' + key['name'] + '/' + key['name']), 'wb').write(r.content):
+		if 'sublibrary' in key and key['subfolder'] == True:
+			if not download(key['download'], key['name'], SUB_LIBRARY_DIR):
 				print('Error while downloading %s' % key['name'])
 		else:
-			if not open((LIBRARY_DIR + '/' + key['name']), 'wb').write(r.content):
+			if not download(key['download'], key['name'], LIBRARY_DIR):
 				print('Error while downloading %s' % key['name'])
 	elif not key['required']:
 		print('Library %s ignored [not required]' % key['name'])
