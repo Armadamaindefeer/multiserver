@@ -6,11 +6,13 @@ import os
 import cmd
 import requests
 import colorama
-import data.lib.utility
-import data.lib.updater
-#import data.lib.constant
-from data.lib.logging import log
+import data.library.utility
+import data.library.updater
+import data.library.sublibrary.constant
 
-import keyboard
-if keyboard.read_key() == "a":
-    print("A Key Pressed")
+def main():
+	updater.checkLib()
+
+
+if __name__ = '__main__':
+	main()
