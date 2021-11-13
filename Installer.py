@@ -22,7 +22,7 @@ def getLibManifest(workingDir):
 		libManifest = json.load(manifest)
 	return libManifest
 
-def downloadLib(url, name, workingDir)
+def downloadLib(url, name, workingDir):
 	r = requests.get(url)
 	if not open((workingDir + '/' + name), 'wb').write(r.content)
 		return False
