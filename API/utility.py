@@ -5,4 +5,4 @@ import json
 import sys
 import cmd
 import colorama
-from data.library.sublibrary.constant import *
+from data.library.constant import *
