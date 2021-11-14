@@ -73,7 +73,7 @@ def checkLib():
 		log(INFO, SOURCE, 'Upgrading la	launcher')
 		if not downloadFiles(tempManifest['launcher']['download'], tempManifest['launcher']['name']):
 				log(ERROR, SOURCE, 'Error while downloading %s' % key['name'])
-			else:
+		else:
 				changeManifest = True
 				log(INFO, SOURCE, 'Sucessful !')
 
