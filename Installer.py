@@ -24,7 +24,7 @@ def getLibManifest(workingDir):
 
 def downloadLib(url, name, workingDir=''):
 	r = requests.get(url)
-	if not open((workingDir + '/' + name), 'wb').write(r.content):
+	if not open((workingDir + name), 'wb').write(r.content):
 		return False
 	else:
 		return True
@@ -55,7 +55,7 @@ libManifest = getLibManifest(LIBRARY_DIR + '/')
 for key in libManifest['library']:
 	if key['required']:
 		print('Downloading %s from %s' % (key['name'], key['download']))
-		if not downloadLib(key['download'], key['name'], LIBRARY_DIR):
+		if not downloadLib(key['download'], key['name'], LIBRARY_DIR + '/'):
 			print('Error while downloading %s' % key['name'])
 	elif not key['required']:
 		print('Library %s ignored [not required]' % key['name'])
