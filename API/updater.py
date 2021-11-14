@@ -3,8 +3,8 @@
 import json
 import os
 import requests
+from data.library.logging import log
 from data.library.constant import *
-
 #>>-----------Function--------------<<
 
 def getNameFromGithub(url):
@@ -13,8 +13,8 @@ def getNameFromGithub(url):
 
 
 def getLibManifest(workingDir):
-	print('Downloading manifest')
 	urlManifest = 'https://raw.githubusercontent.com/Armadamaindefeer/multiserver/main/manifest.json'
+	log(INFO, SOURCE, 'Downloading manifest from %s' % urlManifest)
 	r = requests.get(urlManifest)
 	manifest = open((workingDir + getNameFromGithub(urlManifest)), 'wb').write(r.content)
 	with open(workingDir + getNameFromGithub(urlManifest), 'r') as manifest:
@@ -32,26 +32,42 @@ def downloadLib(url, name, workingDir):
 
 #>>-----------Main------------------<<
 
+SOURCE = __name__
+
+
+
 def checkLib():
 
-	tempLibManifest = getLibManifest(TEMP_DIR)
+	log(INFO, SOURCE, 'Starting Update Checker')
+	tempLibManifest = getLibManifest(TEMP_DIR + '/')
 	with open(LIBRARY_DIR + '/manifest.json', 'r') as manifest:
 		libManifest = json.load(manifest)
+	log(INFO, SOURCE, 'Getting new manifest')
+	changeManifest = False
 	for key in tempLibManifest['library']:
 		countTwoLib = 0
 		for kex in libManifest['library']:
 #Update of library
-			if key['name'] == kex['name'] and key['version'] != kex['version']:
-				if not downloadLib(key['download'], key['name'], LIBRARY_DIR):
-					print('Error while updating')
+			if key['name'] == kex['name']:
+				if key['version'] != kex['version']:
+					log(INFO, SOURCE, 'Updating library %s (%s -> %s)from %s' % (key['name'],kex['version'],key['version'],key['download']))
+					if not downloadLib(key['download'], key['name'], LIBRARY_DIR):
+						log(ERROR, SOURCE,'Error while updating %s' % key['name'])
+					else:
+						countTwoLib += 1
+						changeManifest = True
+						log(INFO, SOURCE, 'Sucessful !')
 				else:
 					countTwoLib += 1
-					changeManifest = True
 #Downloading of new library
 		if countTwoLib <= 0 and key['required']:
+			log(INFO, SOURCE, 'Downloading library %s from %s' % (key['name'], key['download']))
 			if not downloadLib(key['download'], key['name'], LIBRARY_DIR):
-				print('Error while updating')
+				log(ERROR, SOURCE, 'Error while downloading %s' % key['name'])
 			else:
 				changeManifest = True
+				log(INFO, SOURCE, 'Sucessful !')
 	if  changeManifest:
+		log(INFO, SOURCE, 'Updating manifest')
 		os.replace(TEMP_DIR + '/manifest.json',  LIBRARY_DIR + '/manifest.json')
+		log(INFO, SOURCE, 'Job Finish !')
