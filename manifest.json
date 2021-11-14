@@ -37,7 +37,7 @@
 		"required": true
 		}
 	],
-	"executor": {
+	"launcher": {
 		"name": "MultiServer.py",
 		"download": "https://raw.githubusercontent.com/Armadamaindefeer/multiserver/main/MultiServer.py",
 		"version": "0.1"
