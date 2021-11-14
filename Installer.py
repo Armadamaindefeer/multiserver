@@ -59,4 +59,16 @@ for key in libManifest['library']:
 			print('Error while downloading %s' % key['name'])
 	elif not key['required']:
 		print('Library %s ignored [not required]' % key['name'])
-downloadLib(libManifest['executor']['download'], libManifest['executor']['name'])
+downloadLib(libManifest['launcher']['download'], libManifest['launcher']['name'])
+print('Do you want to start MultiServer now ? [Y/n]')
+answer = str(input())
+if answer == 'Y' or answer == 'y' or answer == 'o' or answer == 'O':
+	print('Starting...')
+	import MultiServer as m
+	m.main()
+elif answer == 'N' or answer == 'n':
+	print('Stopping..')
+else:
+	print('Starting...')
+	import MultiServer as m
+	m.main()
