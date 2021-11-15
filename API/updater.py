@@ -23,12 +23,7 @@ def getLibManifest(workingDir):
 
 def downloadFiles(url, name, workingDir=''):
 	r = requests.get(url)
-	if not open((workingDir + name), 'wb').write(r.content):
-		return False
-	else:
-		return True
-
-
+	return open((workingDir + name), 'wb').write(r.content)
 
 #>>-----------Main------------------<<
 
@@ -38,44 +33,53 @@ SOURCE = __name__
 
 def checkLib():
 
+
 	log(INFO, SOURCE, 'Starting Update Checker')
 	tempManifest = getLibManifest(TEMP_DIR + '/')
 	with open(LIBRARY_DIR + '/manifest.json', 'r') as m:
 		manifest = json.load(m)
 	log(INFO, SOURCE, 'Getting new manifest')
 	changeManifest = False
-	for key in tempManifest['library']:
+
+	for temp in tempManifest['library']:
 		countTwoLib = 0
-		for kex in manifest['library']:
+		for old in manifest['library']:
+
 #Update of library
-			if key['name'] == kex['name']:
-				if key['version'] != kex['version']:
-					log(INFO, SOURCE, 'Updating library %s (%s -> %s)from %s' % (key['name'],kex['version'],key['version'],key['download']))
-					if not downloadFiles(key['download'], key['name'], LIBRARY_DIR + '/'):
-						log(ERROR, SOURCE,'Error while updating %s' % key['name'])
+
+			if temp['name'] == old['name']:
+				if temp['version'] != old['version']:
+					log(INFO, SOURCE, 'Updating library %s (%s -> %s)from %s' % (temp['name'],old['version'],temp['version'],temp['download']))
+					if not downloadFiles(temp['download'], temp['name'], LIBRARY_DIR + '/'):
+						log(ERROR, SOURCE,'Error while updating %s' % temp['name'])
 					else:
 						countTwoLib += 1
 						changeManifest = True
 						log(INFO, SOURCE, 'Sucessful !')
 				else:
 					countTwoLib += 1
+
 #Downloading of new library
-		if countTwoLib <= 0 and key['required']:
-			log(INFO, SOURCE, 'Downloading library %s from %s' % (key['name'], key['download']))
-			if not downloadFiles(key['download'], key['name'], LIBRARY_DIR + '/'):
-				log(ERROR, SOURCE, 'Error while downloading %s' % key['name'])
+
+		if countTwoLib <= 0 and temp['required']:
+			log(INFO, SOURCE, 'Downloading library %s from %s' % (temp['name'], temp['download']))
+			if not downloadFiles(temp['download'], temp['name'], LIBRARY_DIR + '/'):
+				log(ERROR, SOURCE, 'Error while downloading %s' % temp['name'])
 			else:
 				changeManifest = True
 				log(INFO, SOURCE, 'Sucessful !')
 
 #Downloading new launcher
+
 	if tempManifest['launcher']['version'] != manifest['launcher']['version']:
 		log(INFO, SOURCE, 'Upgrading la	launcher')
 		if not downloadFiles(tempManifest['launcher']['download'], tempManifest['launcher']['name']):
-				log(ERROR, SOURCE, 'Error while downloading %s' % key['name'])
+				log(ERROR, SOURCE, 'Error while downloading %s' % temp['name'])
 		else:
 				changeManifest = True
 				log(INFO, SOURCE, 'Sucessful !')
+
+#Update Manifest if needed
 
 	if  changeManifest:
 		log(INFO, SOURCE, 'Updating manifest')
