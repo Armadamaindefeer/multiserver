@@ -9,6 +9,10 @@ import colorama
 
 #>>-----------Function--------------<<
 
+def createDirectory(name):
+	if not os.path.isdir(name + '/'):
+		os.mkdir(name)
+
 def getNameFromGithub(url):
 	if url.find('/'):
 		return (url.rsplit('/', 1)[1])
@@ -22,12 +26,9 @@ def getLibManifest(workingDir):
 		libManifest = json.load(manifest)
 	return libManifest
 
-def downloadLib(url, name, workingDir=''):
+def downloadFiles(url, name, workingDir=''):
 	r = requests.get(url)
-	if not open((workingDir + name), 'wb').write(r.content):
-		return False
-	else:
-		return True
+	return open((workingDir + name), 'wb').write(r.content)
 
 #>>-----------Main------------------<<
 
@@ -38,28 +39,24 @@ TEMP_DIR = DATA_DIR + '/.temp'
 SERVER_DIR = DATA_DIR + '/servers'
 
 #Teste and create directory (data/ ; data/config/ ; data/servers ; data/.temp/ ; data/library )
-if not os.path.isdir(DATA_DIR):
-	print('Creating tree directory')
-	os.mkdir(DATA_DIR)
-if not os.path.isdir(CONFIG_DIR + '/'):
-	os.mkdir(CONFIG_DIR)
-if not os.path.isdir(SERVER_DIR + '/'):
-	os.mkdir(SERVER_DIR)
-if not os.path.isdir(LIBRARY_DIR + '/'):
-	os.mkdir(LIBRARY_DIR)
-if not os.path.isdir(TEMP_DIR + '/'):
-	os.mkdir(TEMP_DIR)
+
+print('Creating tree directory')
+createDirectory(DATA_DIR)
+createDirectory(CONFIG_DIR)
+createDirectory(SERVER_DIR)
+createDirectory(LIBRARY_DIR)
+createDirectory(TEMP_DIR)
 
 libManifest = getLibManifest(LIBRARY_DIR + '/')
 
 for key in libManifest['library']:
 	if key['required']:
 		print('Downloading %s from %s' % (key['name'], key['download']))
-		if not downloadLib(key['download'], key['name'], LIBRARY_DIR + '/'):
+		if not downloadFiles(key['download'], key['name'], LIBRARY_DIR + '/'):
 			print('Error while downloading %s' % key['name'])
 	elif not key['required']:
 		print('Library %s ignored [not required]' % key['name'])
-downloadLib(libManifest['launcher']['download'], libManifest['launcher']['name'])
+downloadFiles(libManifest['launcher']['download'], libManifest['launcher']['name'])
 print('Do you want to start MultiServer now ? [Y/n]')
 answer = str(input())
 if answer == 'Y' or answer == 'y' or answer == 'o' or answer == 'O':
