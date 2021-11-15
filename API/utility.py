@@ -30,3 +30,5 @@ def cmdHandler():
 			globals()[cmd[0]](answer)
 		except KeyError:
 			log(ERROR, SOURCE, 'Invalid command')
+		except TypeError:
+			log(ERROR, SOURCE, 'Invalid usage, please refer to user\'s manual')
