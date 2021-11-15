@@ -10,9 +10,17 @@ import data.library.utility as utility
 import data.library.updater as updater
 from data.library.constant import *
 
-def main():
+def init():
 	updater.checkLib()
+
+def main():
+	running = True
+
+	while running :
+		utility.cmdHandler()
+
 
 
 if __name__ == '__main__':
+	init()
 	main()
